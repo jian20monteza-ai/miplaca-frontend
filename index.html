@@ -83,6 +83,32 @@
     cursor:pointer;border:none;transition:all .15s ease;
   }
   .btn-primary{background:var(--navy);color:var(--white);}
+
+  .btn-pay-completo{
+    width:100%;
+    background:linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 60%, #0F2D4F 100%);
+    color:var(--white);font-size:16px;font-weight:700;padding:16px 24px;
+    border-radius:100px;border:none;cursor:pointer;position:relative;overflow:hidden;
+    box-shadow:0 14px 30px -10px rgba(18,57,99,0.55);
+    transition:transform .15s ease, box-shadow .15s ease;
+    display:flex;align-items:center;justify-content:center;gap:10px;
+  }
+  .btn-pay-completo:hover{transform:translateY(-2px);box-shadow:0 18px 36px -8px rgba(18,57,99,0.6);}
+  .btn-pay-completo:active{transform:translateY(0);}
+  .btn-pay-completo::after{
+    content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;
+    background:linear-gradient(120deg, transparent, rgba(255,255,255,0.28), transparent);
+    transform:skewX(-20deg);animation:brilloPago 3.2s ease-in-out infinite;
+  }
+  @keyframes brilloPago{
+    0%{left:-60%;}
+    45%{left:130%;}
+    100%{left:130%;}
+  }
+  .btn-pay-completo .pay-badge-monto{
+    background:var(--teal);color:var(--navy-dark);font-weight:800;
+    padding:3px 12px;border-radius:100px;font-size:14px;
+  }
   .btn-primary:hover{background:var(--navy-dark);}
   .btn-teal{background:var(--teal);color:var(--navy-dark);}
   .btn-teal:hover{background:var(--teal-dark);color:var(--white);}
@@ -435,7 +461,9 @@
       </div>
 
       <p class="price-note">Los pagos se activan próximamente. Por ahora, cada consulta es gratuita mientras seguimos sumando fuentes oficiales.</p>
-      <button id="payButton" class="btn btn-primary" style="display:none;margin-top:4px;margin-bottom:12px;" onclick="document.getElementById('modalPago').classList.add('open')">💳 Pagar S/ 9.00 — Reporte Completo</button>
+      <button id="payButton" class="btn-pay-completo" style="display:none;margin-top:4px;margin-bottom:12px;" onclick="document.getElementById('modalPago').classList.add('open')">
+        💳 Pagar Reporte Completo <span class="pay-badge-monto">S/ 9.00</span>
+      </button>
       <a class="pdf-sample-link" id="pdfSampleLink" href="data:application/pdf;base64,JVBERi0xLjQKJZOMi54gUmVwb3J0TGFiIEdlbmVyYXRlZCBQREYgZG9jdW1lbnQgKG9wZW5zb3VyY2UpCjEgMCBvYmoKPDwKL0YxIDIgMCBSIC9GMiAzIDAgUiAvRjMgNCAwIFIgL0Y0IDUgMCBSCj4+CmVuZG9iagoyIDAgb2JqCjw8Ci9CYXNlRm9udCAvSGVsdmV0aWNhIC9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nIC9OYW1lIC9GMSAvU3VidHlwZSAvVHlwZTEgL1R5cGUgL0ZvbnQKPj4KZW5kb2JqCjMgMCBvYmoKPDwKL0Jhc2VGb250IC9IZWx2ZXRpY2EtQm9sZCAvRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZyAvTmFtZSAvRjIgL1N1YnR5cGUgL1R5cGUxIC9UeXBlIC9Gb250Cj4+CmVuZG9iago0IDAgb2JqCjw8Ci9CYXNlRm9udCAvQ291cmllci1Cb2xkIC9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nIC9OYW1lIC9GMyAvU3VidHlwZSAvVHlwZTEgL1R5cGUgL0ZvbnQKPj4KZW5kb2JqCjUgMCBvYmoKPDwKL0Jhc2VGb250IC9IZWx2ZXRpY2EtT2JsaXF1ZSAvRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZyAvTmFtZSAvRjQgL1N1YnR5cGUgL1R5cGUxIC9UeXBlIC9Gb250Cj4+CmVuZG9iago2IDAgb2JqCjw8Ci9Db250ZW50cyAxMSAwIFIgL01lZGlhQm94IFsgMCAwIDYxMiA3OTIgXSAvUGFyZW50IDEwIDAgUiAvUmVzb3VyY2VzIDw8Ci9Gb250IDEgMCBSIC9Qcm9jU2V0IFsgL1BERiAvVGV4dCAvSW1hZ2VCIC9JbWFnZUMgL0ltYWdlSSBdCj4+IC9Sb3RhdGUgMCAvVHJhbnMgPDwKCj4+IAogIC9UeXBlIC9QYWdlCj4+CmVuZG9iago3IDAgb2JqCjw8Ci9Db250ZW50cyAxMiAwIFIgL01lZGlhQm94IFsgMCAwIDYxMiA3OTIgXSAvUGFyZW50IDEwIDAgUiAvUmVzb3VyY2VzIDw8Ci9Gb250IDEgMCBSIC9Qcm9jU2V0IFsgL1BERiAvVGV4dCAvSW1hZ2VCIC9JbWFnZUMgL0ltYWdlSSBdCj4+IC9Sb3RhdGUgMCAvVHJhbnMgPDwKCj4+IAogIC9UeXBlIC9QYWdlCj4+CmVuZG9iago4IDAgb2JqCjw8Ci9QYWdlTW9kZSAvVXNlTm9uZSAvUGFnZXMgMTAgMCBSIC9UeXBlIC9DYXRhbG9nCj4+CmVuZG9iago5IDAgb2JqCjw8Ci9BdXRob3IgKFwoYW5vbnltb3VzXCkpIC9DcmVhdGlvbkRhdGUgKEQ6MjAyNjA3MTEwMDUzNDgrMDAnMDAnKSAvQ3JlYXRvciAoXCh1bnNwZWNpZmllZFwpKSAvS2V5d29yZHMgKCkgL01vZERhdGUgKEQ6MjAyNjA3MTEwMDUzNDgrMDAnMDAnKSAvUHJvZHVjZXIgKFJlcG9ydExhYiBQREYgTGlicmFyeSAtIFwob3BlbnNvdXJjZVwpKSAKICAvU3ViamVjdCAoXCh1bnNwZWNpZmllZFwpKSAvVGl0bGUgKFwoYW5vbnltb3VzXCkpIC9UcmFwcGVkIC9GYWxzZQo+PgplbmRvYmoKMTAgMCBvYmoKPDwKL0NvdW50IDIgL0tpZHMgWyA2IDAgUiA3IDAgUiBdIC9UeXBlIC9QYWdlcwo+PgplbmRvYmoKMTEgMCBvYmoKPDwKL0ZpbHRlciBbIC9BU0NJSTg1RGVjb2RlIC9GbGF0ZURlY29kZSBdIC9MZW5ndGggMTg0Mgo+PgpzdHJlYW0KR2F1YFQ5NjhmWCZBSiRDb1stNmFaMCE/bE5XY1s+LjRiYDFDOkIoWSFYYnVtT0dGJDItLDRuVSI7OFI2Ly4xJlpDZ2NJcGwxYGZjVTB1bztCKComUF5kZjFecmg7WHFcNmpkbywvRVMzZ1YqSzU3c0AkaDhJUiVmSzRVRXAiPV0iJUREO0hOKWNBKmg3LV5WJUE4ckZFJlM2SmhQVUwpbkJdKCopaVRwQSYsSitHcGo7YS88LDxPbVQ6JlVENVdkTWVoYGpTQzleMHU1PSg6ckxeLS9RRmZBTi1qW0xBUmxWJjotLENWTW5ZM29OLSU8cDdXM1M9LyFCaGhndFk2aCJSOGBCNzApbEVEJGpXRSNUWT1jKFA5PCFmLy1zQVRBbj9baSkzLVJBNDFYSyouci5pQ1lUWFxOKWpHUSdGcmNGKWRLRVJWUjo4bCZPT0clIzQuQFtnQSxfPzd0NzlAK11yS1wocHNjUjgpVSQ9WTQmJGtWOiUtK1htdVdZYSRBbG0/TlNwXyovRignaEBMOD5eUHRYcyJCYVY2OChYalIyMG9CYUE5SG8lIj0jVDRyRGlRMVJSdTNTZT9zdUxgKWlAVCd0QDhjX1xyU0lSWyMjZmJAcE1vNWc9MzBnWiZPMyxUP2otMS5ndFtcMiwqYj1fJ2haa1A0NU0oalZpJTohYEo2LkYxJmtYKDQ0QFtCRW1mVCpTa2Y3Wl5yM2RGRy1rOTRuQEAtOkI2VywzRltMXyxqcUQrbHRtSWxJb1s/OSMrS1tSJStNQy1udWlONWUjaXE6TWJbLi1HW0xKNmJOWnE9LmEqbTItMjE9SlAxJ25UalApVlgxRiEuRCs6aChkMikjJUN1L0BoImIvSS5kVVlCV1FPZ2lRWW82PkEhVE5hX1ZhS3BEXEpGMGgpSFtOMFwuOUhXYGI4QiFgMyY1SjcqV1U5J2NcSlsvWl88LlUxcT4rNS4zUCo5MTZCJ0U+PlBRZzxTSiJYZD8xUj0yWGcrOmRGYmZvIzxqQT46OSFWOV0mUyg1X2UnOkVeKE5EYzg6UCZlUTY8LFduMjdqU2xMXUQsVG1kXkMtSzBgY11pYkAkTDRVLV5CREpVVVE3XlFtNUVOTC8jNEMjXDMmRl4tRUpYWSljRDovOG4+QC1TTjpbb2AuY0IkQFE1WTdhWkVALi8kbVQ5LGUtQkBwQ2VNYjBhRGo2cmBSXiVRK2FUSWI1YSVeYEMhWylQKUFvRDdkXlU1OFYsUTJKXltLM1RWVElkNmUyRE1dYzpRJ20pJkZobEpUYS9VOVdMOUBUV25WIUdbcDtTaFUwUSRVP3FWaj5kTldmY2hNSFA6TmY1S1JaZVlJQFlCQHQ1J11VR19ucEhXZiRSbUVOZWJhbFplPT9IPGRZVV05XkJbXzAjX0xfQzQ/KCVhIlloUTVVNV1UKy1ELDJXYl1XKXM7bVssTmM3Pzw0MGRZXEYqbktFdVhaXkdxWU9UQ0RrInAzJk9BPTEyLTU1SVxvMlldR1NkclFJO2JNTkdJUkA5VVVEVlRiPkxONC0nTC5UOjtPJzI1YCteZj0sQFUuaUAmOjtBJEk3KTUnN1MxU1FvOmohSlU1bl5AJkoqZU9KS3AnRU9dIlkvRCw8KS07cSdAS0opb21RPjlUWUFRa2xVbFE/OSgxKEAkTUorPDxcYD1ULkMoLzhgUm1FYUJOU0dQPkcoPT9gbzt0MCE2YzxcSiFvVDQ/Sj80RDghPkFSZyFmLUQpb3BnWmRpKmMmMCZqWElGJW9zJWAnOyVqZzZWYlZzY2Y3TVQ+cSJPM09XLGolQm9SZDVMJzc2MExURyJnYnVQWlFARnNxLWIsYWlzWDcyLXJzLSQlXkA7Kz1lKl1FMWo1PipfOTcsSHEiO3JwQzhvW1E7bltPMywoM20jRFA1Ml8hUjBWPDc3SGxLXDo8RjZGXS44MUBFWk5KXGRpaDpjLGwxaG9WcTViOCQ/NFdnV002VlpBOiJKVkk5LWclLSlII2NJZl0ibj5AJjM5PXVcT2w2aCU2XFd1VGZoNWFxVWcvKmhTKzlZUCY5N2tcRl5iTEMxSCpWbyJoNy04PGgjckJnZVUjND0uQSIkLWVRUlY2bSVgbzBoUUtWKW8uTDNAXEdrIj5iaGNaVFAiS1JfWSdiaEIpVD4yRWs0LW9pLE5RL3NTRCtlKjxRZ0tWOj1rZC1NTHNNJzheMGk5ZHJzTz9DWDgzaGU2ZCQ2VDlXQG03SSQ/bV0/cU5JWzpYaSRnOF51SW01YjcnRFgiTT1LQVVULjw5ZTo1QlJqZilKMSwkQkczUEUuUFsrSlE1LzFndE44ZCRPNjFHRCxbOWU5b3I4Syo4SCUhVSxuWyhUSnJXYXRtNTxTOT5yU1E2XTAiYi5CU1AuZUljJUIwI1JuYUNXLkhZbVlVJlhHdVJkcj9NLWYiWTI+UlV1W34+ZW5kc3RyZWFtCmVuZG9iagoxMiAwIG9iago8PAovRmlsdGVyIFsgL0FTQ0lJODVEZWNvZGUgL0ZsYXRlRGVjb2RlIF0gL0xlbmd0aCAxNDQ2Cj4+CnN0cmVhbQpHYXVgUzswMUdOJjpXZURtKiFZODoyaEldUDNvZS1ObUpiKSVBaSIrJy8pQ05VcmpPNGc0bScxbFlnP2U4TTVSVVFDQWZ0QSROSWNwWTROTVQuKD9MZC8nK1whSWZzY2w5LDxuK0M1JzAqZidMbSUtLFgiJWMoRz9SM3MzcDskXl1nXCJMXjhlLjdvSGNSMG5GKTBqIk0iVmdcT2dsQWZhIk4zc2dTSDhFTGgqXFlxR0c4LCFlITJFQTQiU3UkU200UFkhOmAvNnAoTW9LWG9tZmA6JzJUNkE7dEEmPjhnIlNnbmBlcDRjXkxKXFcpcCg4PE9OSGMzIzc3TjBgQkRvTkFQTScubm9PXkxfVlIwKypzaWBvYWpjNkpuOTwuVENePkE0QXBeNm02TCk7dC1NNTlPWV8qbTVLZUEjMlxDVVVsU288R1QvIStASV5NV2I2by4lJmdSJnEkI2hEVUw7XS8qVG5xQmNMYCZtQTJrc008bTlmVSMjSyljS3EmLyouSFpMTT9oIkQhaU41RTRocVwoITJrODE+XmUrdEdDSypPTllJKTAoOUxtQSJRUkFkVDUtZldHKytHU2JkPyE5Y1ZDaWo4JlBIIz5aTiExb0khW142cE9DZ04jSCJxRy1rcCovJWtAZztJLlImai8ya2Y1cDJrbzpSS11UbmFmbEYjOldfQkwwaEZvTFVJOHEtPWlZMEhUNE0wN1dWbmEiPCFNc1I7LT5XNmBAOl1nSyd0LTsrcFwnOW4zYGtZRlkiSFcnT0MrWTs6aG8wIkpccDI4I0ArLDtbRi9bUWA2PFlvazpadTMjQ1thVXFbJjwnITtNSzQ4Z1IvTDNwPnVeYzkkUyJLSShSVEdRRilIWFlROW8ic0cnLUU0JUpVcD1PbUdCREQsZj4zc21FWkVwZSw8LFlJYFVeUGAuKEdzNi5VMF9KR2lVXHVhRkRxXXMpSWBtISc3LU51ZiEpQHBhXF50KkdZc0NFQ1RMMjRPLDFdOztdOSYraDJPTlhOS3JzJTJvQlZ0ND5LZmRTSDRaTWM7UlM9QEJtI3JsZSZTWUlzUmFsVVxHPllAZjldP2JlaSFKYTRaY0tPKTVvYmwoVHBAQ3REVl5pUVkmQzIhNW8pOV8+UFZcNTMtN2hPRzpfV28pI3VfKlROQSdrQjskQFZMaUZJPUMwRDJTJnRMaXJLZihJWW8hKCdFNDJCcm88cF0hRVZLVE4uUi40JjdbckJtU2BfIVRzMCJlRFFvRT1IMTFwKW9hTGRSRCxkTmhhYHU2aVU8ZnUuUCcoQTAoSFA9My5KITAzQUJXWT4lImpWOW5SLUglYDVAS29bVjtzdTxUZyslaS4rT0pyXGhMa10/a0Q8VWY2bV1JZEIkLjk5Tz1NTWQ9NjZab0pZY2MhUm9CVFFQWmxPXWVvWDZFSj0uaUVLPiQ7T2FiU1s+W0giWkhhMz9VJW4pb0EzLkBCcCM0KHRqJUdcXURfNyYxaEgzc1pGI0ZxLktOJDU4OV9IUTUxXnJfa0tzLCdyaElFPlwjKG5ccF40K2FkYi47KTtoaD4hRl0nWixtN0NrPys2ZUE4VzVQRiwxQlhJMVJncj11aVxjb2svP2ZWLS0xO0U+OiIxRFU7LlgrOzRPI2RyWDYzWGtTXHJpbjheLU40LkY0XDJbVFo0MD4yN0ZCKkFcVl5MRCcxN1YuYmZjZiZpOD1WWkJbPFFQSEEtaVEuX2ZaXyo4XF5EWmpDSFFlJVM1cVE6Ozg/KVIiYVpKSyIuaFxGViROZzg8L2BFUSFbR09sZ0JXdVEuNUxhIUoqM0RROHBDRjVIQWU/N0gpOU4+aDkkW2BlWTRPcEwnRzUoTFpNcTpwTlEuPGBeInEoYFA+RGMnJEQtXyIhIiJKQWdDOiE6am9zW1g6M3JdMyNrSXUtfj5lbmRzdHJlYW0KZW5kb2JqCnhyZWYKMCAxMwowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAwNjEgMDAwMDAgbiAKMDAwMDAwMDEyMiAwMDAwMCBuIAowMDAwMDAwMjI5IDAwMDAwIG4gCjAwMDAwMDAzNDEgMDAwMDAgbiAKMDAwMDAwMDQ1MSAwMDAwMCBuIAowMDAwMDAwNTY2IDAwMDAwIG4gCjAwMDAwMDA3NjEgMDAwMDAgbiAKMDAwMDAwMDk1NiAwMDAwMCBuIAowMDAwMDAxMDI1IDAwMDAwIG4gCjAwMDAwMDEzMDUgMDAwMDAgbiAKMDAwMDAwMTM3MSAwMDAwMCBuIAowMDAwMDAzMzA1IDAwMDAwIG4gCnRyYWlsZXIKPDwKL0lEIApbPDgxMTI3NjY3OTA5YTI4ZDIyZGJkYzYyN2ViYzMyZjRhPjw4MTEyNzY2NzkwOWEyOGQyMmRiZGM2MjdlYmMzMmY0YT5dCiUgUmVwb3J0TGFiIGdlbmVyYXRlZCBQREYgZG9jdW1lbnQgLS0gZGlnZXN0IChvcGVuc291cmNlKQoKL0luZm8gOSAwIFIKL1Jvb3QgOCAwIFIKL1NpemUgMTMKPj4Kc3RhcnR4cmVmCjQ4NDMKJSVFT0YK" download="MiPlaca-Reporte-Completo-vista-previa.pdf">📄 Ver ejemplo del Reporte Completo (PDF, vista previa del producto)</a>
     </div>
 
@@ -728,15 +756,54 @@
   (function revisarRetornoDePago(){
     const params = new URLSearchParams(window.location.search);
     const pago = params.get('pago');
-    const placaPago = params.get('placa');
-    if(pago === 'exito'){
-      alert(`¡Pago recibido! Tu Reporte Completo de la placa ${placaPago} está siendo procesado. Te lo enviaremos por WhatsApp en breve.`);
-    } else if(pago === 'fallo'){
+    const placaPago = (params.get('placa') || '').toUpperCase();
+
+    if(pago === 'fallo'){
       alert('El pago no se pudo completar. Intenta de nuevo o usa Yape/Plin.');
-    } else if(pago === 'pendiente'){
+      return;
+    }
+    if(pago === 'pendiente'){
       alert('Tu pago está pendiente de confirmación. Te avisaremos apenas se acredite.');
+      return;
+    }
+    if(pago === 'exito' && placaPago){
+      mostrarAvisoPagoConfirmando(placaPago);
+      revisarEstadoPagoConReintentos(placaPago, 0);
     }
   })();
+
+  function mostrarAvisoPagoConfirmando(placa){
+    const aviso = document.createElement('div');
+    aviso.id = 'avisoPago';
+    aviso.style.cssText = `
+      position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:300;
+      background:var(--navy);color:var(--white);padding:14px 22px;border-radius:100px;
+      font-weight:600;font-size:14px;box-shadow:0 12px 30px -10px rgba(18,57,99,0.5);
+      display:flex;align-items:center;gap:10px;
+    `;
+    aviso.innerHTML = `⏳ Confirmando tu pago de la placa ${placa}...`;
+    document.body.appendChild(aviso);
+  }
+
+  async function revisarEstadoPagoConReintentos(placa, intento){
+    const aviso = document.getElementById('avisoPago');
+    if(intento > 8){
+      if(aviso) aviso.innerHTML = `⚠️ Aún confirmando tu pago. Si tarda más de un minuto, escríbenos por WhatsApp.`;
+      return;
+    }
+    try{
+      const res = await fetch(`${BACKEND_URL}/api/pago/estado?placa=${encodeURIComponent(placa)}`);
+      const data = await res.json();
+      if(data.pagado){
+        if(aviso){
+          aviso.style.background = 'var(--teal-dark)';
+          aviso.innerHTML = `✅ ¡Pago confirmado! <a href="${BACKEND_URL}/api/consulta/pdf-completo?placa=${encodeURIComponent(placa)}" style="color:white;text-decoration:underline;font-weight:700;">Descargar Reporte Completo (PDF)</a>`;
+        }
+        return;
+      }
+    }catch(err){ /* seguimos reintentando */ }
+    setTimeout(() => revisarEstadoPagoConReintentos(placa, intento + 1), 4000);
+  }
 
   const chips = document.querySelectorAll('.chip');
   const plateVisual = document.getElementById('plateVisual');
